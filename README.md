@@ -5,12 +5,12 @@ Automatically loads your resources for [Excalibur](https://excaliburjs.com/) gam
 All of the Excalibur resource types are supported as well as Tiled and Aseprite.
 
 ```js
-// equivalent to ex.ImageSource(path)
-const sprite = $res('/player.png').toSprite()
+// equivalent to ex.ImageSource('/res/player.png')
+const sprite = $res('player.png').toSprite()
 actor.graphics.use(sprite)
 
 // resource can safely be used from $res inline, no need to store in a variable
-$res('/jump.mp3').play()
+$res('jump.mp3').play()
 ```
 
 ## Installation
