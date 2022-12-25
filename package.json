@@ -1,6 +1,5 @@
 {
   "name": "vite-plugin-excalibur-resources",
-  "private": true,
   "version": "0.0.0-0",
   "type": "module",
   "main": "./src/index.js",
