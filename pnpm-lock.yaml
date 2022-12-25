@@ -1,5 +1,8 @@
 lockfileVersion: 5.4
 
+overrides:
+  vite-plugin-excalibur-resources: workspace*
+
 importers:
 
   .:
@@ -32,15 +35,13 @@ importers:
       '@excaliburjs/plugin-aseprite': ^0.27.0
       '@excaliburjs/plugin-tiled': ^0.27.0
       excalibur: ^0.27.0
-      resolve.exports: ^1.1.0
       typescript: ^4.9.3
       vite: ^4.0.0
-      vite-plugin-excalibur-resources: workspace:*
+      vite-plugin-excalibur-resources: workspace*
     dependencies:
       '@excaliburjs/plugin-aseprite': 0.27.0_excalibur@0.27.0
       '@excaliburjs/plugin-tiled': 0.27.0_excalibur@0.27.0
       excalibur: 0.27.0
-      resolve.exports: 1.1.0
     devDependencies:
       typescript: 4.9.4
       vite: 4.0.3

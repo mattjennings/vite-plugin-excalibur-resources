@@ -45,5 +45,10 @@
     "query-string": "^8.1.0",
     "recast": "^0.22.0",
     "resolve.exports": "^1.1.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "vite-plugin-excalibur-resources": "workspace*"
+    }
   }
 }
