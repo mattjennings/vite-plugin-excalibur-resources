@@ -2,6 +2,8 @@
 
 Automatically loads your resources for [Excalibur](https://excaliburjs.com/) games.
 
+All of the Excalibur resource types are supported as well as Tiled and Aseprite.
+
 ```js
 // equivalent to ex.ImageSource(path)
 const sprite = $res('/player.png').toSprite()
@@ -53,10 +55,8 @@ engine.start(loader)
 Use `$res` to load resources
 
 ```js
-const image = $res('./img/myimage.png')
-
 const sprite = new ex.Sprite({
-  image: image,
+  image: $res('myimage.png'),
 })
 ```
 
@@ -72,17 +72,16 @@ If you are using Typescript (or jsconfig.json), you can get autocompletion for y
 }
 ```
 
-## Changing asset type
+## Overriding asset loader
 
 By default, resource types are detected by their file extension. However some extensions are used for multiple kinds of asset types (such as JSON). You can specify the asset type by using the `as` keyword.
 
 ```js
-const sprite = $res('/player.json', { as: 'aseprite' }).toSprite()
+$res('/player.json', { as: 'aseprite' })
+$res('/tileset.json', { as: 'tiled' })
 ```
 
 ## Adding a custom resource loader
-
-All of the [Excalibur resource types](https://excaliburjs.com/docs/imagesource/) are supported, as well as Tiled and Aseprite files.
 
 You can add your own asset loaders by using the `addResourceLoader` function. This should be done as early as possible in your code, before any `$res` calls for that asset are made.
 
