@@ -11,7 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
-src/types.d.ts
+src/generated.d.ts
 
 # Editor directories and files
 .vscode/*

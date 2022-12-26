@@ -4,7 +4,7 @@ export default {
   load: (url: string, options?: { bustCache?: boolean }) => AsepriteResource,
 }
 
-declare module '../index' {
+declare module '../types' {
   interface Resources {
     aseprite: {
       type: AsepriteResource

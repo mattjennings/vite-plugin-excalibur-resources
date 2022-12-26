@@ -5,7 +5,7 @@ export default {
   extensions: ['tmx'],
 }
 
-declare module '../index' {
+declare module '../types' {
   interface Resources {
     tiled: {
       type: TiledMapResource

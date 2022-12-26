@@ -22,7 +22,7 @@ export function generateTypes(publicPath) {
 import * as ex from 'excalibur'
 import { ResourceByExtension } from './index'
 
-declare module './index' {
+declare module './types' {
   interface Resources {
     image: {
       type: ex.ImageSource
@@ -55,7 +55,7 @@ declare module './index' {
   writeFileSync(
     path.join(
       getPackageEntry('vite-plugin-excalibur-resources'),
-      'src/types.d.ts'
+      'src/generated.d.ts'
     ),
     types,
     'utf-8'

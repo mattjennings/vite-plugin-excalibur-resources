@@ -1,8 +1,6 @@
 # vite-plugin-excalibur-resources
 
-Automatically loads your resources for [Excalibur](https://excaliburjs.com/) games.
-
-All of the Excalibur resource types are supported as well as Tiled and Aseprite, with some configuration.
+Automatically loads your resources for [Excalibur](https://excaliburjs.com/) games. All of the Excalibur resource types are supported as well as Tiled and Aseprite, with some configuration.
 
 ```js
 // equivalent to ex.ImageSource('/res/player.png')
@@ -12,6 +10,10 @@ actor.graphics.use(sprite)
 // resource can safely be used from $res inline, no need to store in a variable
 $res('jump.mp3').play()
 ```
+
+It even has full typescript support for your files
+
+![autocomplete](./assets/autocomplete.gif)
 
 ## Installation
 
@@ -60,9 +62,9 @@ const sprite = new ex.Sprite({
 })
 ```
 
-## Types
+## Typescript
 
-If you are using Typescript (or jsconfig.json), you can get autocompletion for your resources by updating your tsconfig.json like so:
+You can get proper typing and autocompletion for your resources by updating your tsconfig.json like so:
 
 ```json
 {
@@ -139,7 +141,7 @@ const custom = $res('/model.json', { as: 'custom' })
 
 ## Aseprite / Tiled
 
-I've provided optional loaders for Aseprite and Tiled. To use them, install `@excaliburjs/plugin-aseprite` or `@excaliburjs/plugin-tiled` and add them to a [custom loader])(#custom-resource-loader).
+I've provided optional loaders for Aseprite and Tiled. You can import and add them to a [custom loader])(#custom-resource-loader).
 
 ```ts
 // src/loaders.ts
