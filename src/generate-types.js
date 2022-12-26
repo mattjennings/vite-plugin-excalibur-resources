@@ -57,7 +57,7 @@ export function generateTypes(publicPath) {
           options: {
             bustCache?: boolean
           }
-        }        
+        }
       }
 
       type Extensions = Resource[keyof Resource]['extensions']
@@ -69,14 +69,6 @@ export function generateTypes(publicPath) {
         }[keyof Resource]
       }
 
-      interface ResourceOptions {
-        image: {
-          bustCache?: boolean
-          filtering?: ex.ImageFiltering
-        }
-        tiled: import("${packagePaths.pluginTiled}").TiledMapOptions    
-        aseprite: { bustCache?: boolean }
-      }
 
       interface Files {
   ${files
