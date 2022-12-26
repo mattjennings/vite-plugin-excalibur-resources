@@ -20,7 +20,7 @@ export function generateTypes(publicPath) {
 
   const types = /* ts */ `\
 import * as ex from 'excalibur'
-import { ResourceByExtension } from './index'
+import { ResourceByExtension } from './types'
 
 declare module './types' {
   interface Resources {

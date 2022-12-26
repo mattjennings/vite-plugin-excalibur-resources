@@ -1,6 +1,6 @@
 example
 node_modules
-src/types.d.ts
+src/generated.d.ts
 tests
 pnpm-workspace.yaml
 .prettierrc
