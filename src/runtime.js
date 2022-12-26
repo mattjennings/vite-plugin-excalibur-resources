@@ -1,6 +1,3 @@
-import { AsepriteResource } from '@excaliburjs/plugin-aseprite'
-import { TiledMapResource } from '@excaliburjs/plugin-tiled'
-import { ImageSource, Sound } from 'excalibur'
 import loaders from 'virtual:resource-loaders'
 
 export const resources = []

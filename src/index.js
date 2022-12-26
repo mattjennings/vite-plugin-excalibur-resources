@@ -5,13 +5,6 @@ import tsParser from 'recast/parsers/typescript.js'
 import fg from 'fast-glob'
 import { generateTypes } from './generate-types.js'
 
-const DEFAULT_LOADERS = {
-  image: 'vite-plugin-excalibur-resources/loaders/image',
-  sound: 'vite-plugin-excalibur-resources/loaders/sound',
-  tiled: 'vite-plugin-excalibur-resources/loaders/tiled',
-  aseprite: 'vite-plugin-excalibur-resources/loaders/aseprite',
-}
-
 const virtualLoadersModuleId = 'virtual:resource-loaders'
 const resolvedVirtualLoadersModuleId = '\0' + virtualLoadersModuleId
 
@@ -31,6 +24,13 @@ export default function resources(options = {}) {
   return {
     name: 'vite-plugin-import-excalibur-resource',
     enforce: 'pre',
+    config() {
+      return {
+        optimizeDeps: {
+          exclude: ['virtual:resource-loaders'],
+        },
+      }
+    },
     configResolved(config) {
       publicPath = config.publicDir
     },
@@ -152,14 +152,14 @@ export default function resources(options = {}) {
       }
     },
     async buildStart() {
-      const files = await fg(['public/res/**/*'])
+      const files = await fg([`${publicPath}/res/**/*`])
       for (let file of files) {
         this.addWatchFile(file)
       }
       generateTypes(publicPath)
     },
     handleHotUpdate(ctx) {
-      if (ctx.file.includes('/public/res')) {
+      if (ctx.file.includes(`${publicPath}/res`)) {
         generateTypes(publicPath)
       }
     },
