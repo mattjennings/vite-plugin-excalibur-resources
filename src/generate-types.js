@@ -18,37 +18,29 @@ export function generateTypes(publicPath) {
     ? walk(resPath).map((path) => path.split(resPath + '/').pop())
     : []
 
-  const types = dedent(/* ts */ `
-      import * as ex from 'excalibur'
-          
-      interface Resource {
-        image: {
-          type: ex.ImageSource
-          extensions: 'png' | 'jpg' | 'jpeg' | 'gif' | 'webp'
-          options:{
-            bustCache?: boolean
-            filtering?: ex.ImageFiltering
-          } 
-        }
+  const types = /* ts */ `\
+import * as ex from 'excalibur'
+import { ResourceByExtension } from './index'
 
-        sound: {
-          type: ex.Sound
-          extensions: 'mp3' | 'ogg' | 'wav'
-          options: {}
-        }
-      }
+declare module './index' {
+  interface Resources {
+    image: {
+      type: ex.ImageSource
+      extensions: 'png' | 'jpg' | 'jpeg' | 'gif' | 'webp'
+      options:{
+        bustCache?: boolean
+        filtering?: ex.ImageFiltering
+      } 
+    }
 
-      type Extensions = Resource[keyof Resource]['extensions']
-
-      
-      type ResourceByExtension = {
-        [E in Extensions]: {
-          [K in keyof Resource]: E extends Resource[K]['extensions'] ? K : never
-        }[keyof Resource]
-      }
+    sound: {
+      type: ex.Sound
+      extensions: 'mp3' | 'ogg' | 'wav'            
+    }
+  }
 
 
-      interface Files {
+  interface Files {
   ${files
     .map((file) => {
       const extension = path.extname(file)
@@ -57,20 +49,8 @@ export function generateTypes(publicPath) {
       )}: ResourceByExtension['${extension.substring(1)}']`
     })
     .join('\n')}
-      }
-    
-   declare global { 
-    export function $res<
-      T extends keyof Files,
-      As extends keyof Resource = Files[T]
-    >(
-      path: T,
-      options?: {
-        as?: As
-      } & (As extends keyof Resource ? Resource[As]['options'] : {})
-    ): Resource[As]['type']
-   }
-  `)
+  }
+}`
 
   writeFileSync(
     path.join(
