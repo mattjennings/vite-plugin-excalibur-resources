@@ -1,3 +1,6 @@
+import aseprite from '../src/loaders/aseprite'
+import tiled from '../src/loaders/tiled'
+
 export class CustomResource {
   path: string
   options: any
@@ -9,12 +12,14 @@ export class CustomResource {
 }
 
 export default {
-  custom: {
-    load: (path: string, options: any) => {
-      return new CustomResource(path, options)
-    },
-    extensions: ['custom'],
-  },
+  aseprite,
+  tiled,
+  // custom: {
+  //   load: (path: string, options: any) => {
+  //     return new CustomResource(path, options)
+  //   },
+  //   extensions: ['custom'],
+  // },
 }
 
 declare module '../src/types' {
