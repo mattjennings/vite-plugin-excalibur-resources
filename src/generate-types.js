@@ -1,22 +1,14 @@
-/* eslint-disable no-empty */
 import dedent from 'dedent'
 import path from 'path'
 import { posixify, walk } from './fs.js'
 import { createRequire } from 'module'
 import { existsSync, writeFileSync } from 'fs'
-import { resolve } from 'resolve.exports'
 
 const require = createRequire(import.meta.url)
 
 const getPackageEntry = (name) => {
   const p = require.resolve(name)
   return p.substring(0, p.lastIndexOf(name + '/') + name.length)
-}
-
-const packagePaths = {
-  pluginAseprite: getPackageEntry('@excaliburjs/plugin-aseprite'),
-  pluginTiled: getPackageEntry('@excaliburjs/plugin-tiled'),
-  resources: getPackageEntry('vite-plugin-excalibur-resources'),
 }
 
 export function generateTypes(publicPath) {
@@ -43,20 +35,6 @@ export function generateTypes(publicPath) {
           type: ex.Sound
           extensions: 'mp3' | 'ogg' | 'wav'
           options: {}
-        }
-
-        tiled: {
-          type: import("${packagePaths.pluginTiled}").TiledMap
-          extensions: 'tmx'
-          options: import("${packagePaths.pluginTiled}").TiledMapOptions
-        }
-
-        aseprite: {
-          type: import("${packagePaths.pluginAseprite}").AsepriteResource
-          extensions: 'aseprite'
-          options: {
-            bustCache?: boolean
-          }
         }
       }
 
@@ -95,7 +73,10 @@ export function generateTypes(publicPath) {
   `)
 
   writeFileSync(
-    path.join(packagePaths.resources, 'src/types.d.ts'),
+    path.join(
+      getPackageEntry('vite-plugin-excalibur-resources'),
+      'src/types.d.ts'
+    ),
     types,
     'utf-8'
   )

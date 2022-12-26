@@ -1,9 +1,17 @@
 {
   "name": "vite-plugin-excalibur-resources",
-  "version": "0.0.0-2",
+  "version": "0.0.0-4",
   "type": "module",
   "main": "./src/index.js",
   "exports": {
+    "./loaders/aseprite": {
+      "import": "./src/loaders/aseprite.js",
+      "types": "./src/loaders/aseprite.d.ts"
+    },
+    "./loaders/tiled": {
+      "import": "./src/loaders/tiled.js",
+      "types": "./src/loaders/tiled.d.ts"
+    },
     "./loaders": {
       "import": "./src/loaders.js"
     },
@@ -22,6 +30,12 @@
       ],
       "types": [
         "src/types.d.ts"
+      ],
+      "loaders/aseprite": [
+        "src/loaders/aseprite.d.ts"
+      ],
+      "loaders/tiled": [
+        "src/loaders/tiled.d.ts"
       ]
     }
   },
@@ -33,14 +47,14 @@
     "prepublishOnly": "npm run test -- run"
   },
   "peerDependencies": {
-    "@excaliburjs/plugin-aseprite": "^0.27.0",
-    "@excaliburjs/plugin-tiled": "^0.27.0",
     "excalibur": "^0.27.0"
+  },
+  "optionalDependencies": {
+    "@excaliburjs/plugin-aseprite": "^0.27.0",
+    "@excaliburjs/plugin-tiled": "^0.27.0"
   },
   "devDependencies": {
     "@babel/parser": "^7.20.7",
-    "@excaliburjs/plugin-aseprite": "^0.27.0",
-    "@excaliburjs/plugin-tiled": "^0.27.0",
     "excalibur": "^0.27.0",
     "typescript": "^4.9.3",
     "vite": "^4.0.0",
@@ -50,8 +64,7 @@
     "dedent": "^0.7.0",
     "fast-glob": "^3.2.12",
     "query-string": "^8.1.0",
-    "recast": "^0.22.0",
-    "resolve.exports": "^1.1.0"
+    "recast": "^0.22.0"
   },
   "pnpm": {
     "overrides": {

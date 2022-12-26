@@ -15,7 +15,6 @@ importers:
       fast-glob: ^3.2.12
       query-string: ^8.1.0
       recast: ^0.22.0
-      resolve.exports: ^1.1.0
       typescript: ^4.9.3
       vite: ^4.0.0
       vitest: ^0.26.2
@@ -24,11 +23,11 @@ importers:
       fast-glob: 3.2.12
       query-string: 8.1.0
       recast: 0.22.0
-      resolve.exports: 1.1.0
-    devDependencies:
-      '@babel/parser': 7.20.7
+    optionalDependencies:
       '@excaliburjs/plugin-aseprite': 0.27.0_excalibur@0.27.0
       '@excaliburjs/plugin-tiled': 0.27.0_excalibur@0.27.0
+    devDependencies:
+      '@babel/parser': 7.20.7
       excalibur: 0.27.0
       typescript: 4.9.4
       vite: 4.0.3
@@ -284,6 +283,7 @@ packages:
       excalibur: 0.27.0
     dependencies:
       excalibur: 0.27.0
+    dev: false
 
   /@excaliburjs/plugin-tiled/0.27.0_excalibur@0.27.0:
     resolution: {integrity: sha512-69tcE3r7ye2VjHqsv9UztQCQK3jZP/puzA2AqYoFDQuFenMlx4/3YynlkwGlm45l4OF3QTbd2QZ1rAlqvUROLw==}
@@ -294,6 +294,7 @@ packages:
       fast-xml-parser: 3.21.1
       pako: 1.0.11
       zstddec: 0.0.2
+    dev: false
 
   /@nodelib/fs.scandir/2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -502,6 +503,7 @@ packages:
     hasBin: true
     dependencies:
       strnum: 1.0.5
+    dev: false
 
   /fastq/1.14.0:
     resolution: {integrity: sha512-eR2D+V9/ExcbF9ls441yIuN6TI2ED1Y2ZcA5BmMtJsOkWOFRJQ0Jt0g1UwqXJJVAb+V+umH5Dfr8oh4EVP7VVg==}
@@ -715,6 +717,7 @@ packages:
 
   /pako/1.0.11:
     resolution: {integrity: sha512-4hLB8Py4zZce5s4yd9XzopqwVv/yGNhV1Bl8NTmCq1763HeK2+EwVTv+leGeL13Dnh2wfbqowVPXCIO0z4taYw==}
+    dev: false
 
   /path-parse/1.0.7:
     resolution: {integrity: sha512-LDJzPVEEEPR+y48z93A0Ed0yXb8pAByGWo/k5YYdYgpY2/2EsOsksJrq7lOHxryrVOn1ejG6oAp8ahvOIQD8sw==}
@@ -782,11 +785,6 @@ packages:
       tslib: 2.4.1
     dev: false
 
-  /resolve.exports/1.1.0:
-    resolution: {integrity: sha512-J1l+Zxxp4XK3LUDZ9m60LRJF/mAe4z6a4xyabPHk7pvK5t35dACV32iIjJDFeWZFfZlO29w6SZ67knR0tHzJtQ==}
-    engines: {node: '>=10'}
-    dev: false
-
   /resolve/1.22.1:
     resolution: {integrity: sha512-nBpuuYuY5jFsli/JIs1oldw6fOQCBioohqWZg/2hiaOybXOft4lonv85uDOKXdf8rhyK159cxU5cDcK/NKk8zw==}
     hasBin: true
@@ -844,6 +842,7 @@ packages:
 
   /strnum/1.0.5:
     resolution: {integrity: sha512-J8bbNyKKXl5qYcR36TIO8W3mVGVHrmmxsd5PAItGkmyzwJvybiw2IVq5nqd0i4LSNSkB/sx9VHllbfFdr9k1JA==}
+    dev: false
 
   /supports-preserve-symlinks-flag/1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
@@ -1053,3 +1052,4 @@ packages:
 
   /zstddec/0.0.2:
     resolution: {integrity: sha512-DCo0oxvcvOTGP/f5FA6tz2Z6wF+FIcEApSTu0zV5sQgn9hoT5lZ9YRAKUraxt9oP7l4e8TnNdi8IZTCX6WCkwA==}
+    dev: false

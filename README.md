@@ -2,7 +2,7 @@
 
 Automatically loads your resources for [Excalibur](https://excaliburjs.com/) games.
 
-All of the Excalibur resource types are supported as well as Tiled and Aseprite.
+All of the Excalibur resource types are supported as well as Tiled and Aseprite, with some configuration.
 
 ```js
 // equivalent to ex.ImageSource('/res/player.png')
@@ -135,4 +135,19 @@ const custom = $res('/model.ctm')
 
 // force a .json file to use your custom loader
 const custom = $res('/model.json', { as: 'custom' })
+```
+
+## Aseprite / Tiled
+
+I've provided optional loaders for Aseprite and Tiled. To use them, install `@excaliburjs/plugin-aseprite` or `@excaliburjs/plugin-tiled` and add them to a [custom loader])(#custom-resource-loader).
+
+```ts
+// src/loaders.ts
+import aseprite from 'vite-plugin-excalibur-resources/loaders/aseprite'
+import tiled from 'vite-plugin-excalibur-resources/loaders/tiled'
+
+export default {
+  aseprite,
+  tiled,
+}
 ```
