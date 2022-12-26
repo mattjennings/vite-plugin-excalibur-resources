@@ -1,6 +1,6 @@
 # vite-plugin-excalibur-resources
 
-Automatically loads your resources for [Excalibur](https://excaliburjs.com/) games. All of the Excalibur resource types are supported as well as Tiled and Aseprite, with some configuration.
+Automatically loads your resources for [Excalibur](https://excaliburjs.com/) games with full Typescript support.
 
 ```js
 // equivalent to ex.ImageSource('/res/player.png')
@@ -18,7 +18,7 @@ It even has full typescript support for your files
 ## Installation
 
 ```bash
-npm install vite-plugin-excalibur-resources @excaliburjs/plugin-aseprite @excaliburjs/plugin-tiled
+npm install vite-plugin-excalibur-resources
 ```
 
 Add the plugin to your Vite config
@@ -44,22 +44,34 @@ public
     └── mysound.mp3
 ```
 
-Create a loader that will load the resources created from `$res`
-
-```js
-import { resources } from 'vite-plugin-excalibur-resources/runtime'
-
-const loader = new Loader(resources)
-
-engine.start(loader)
-```
-
 Use `$res` to load resources
 
 ```js
 const sprite = new ex.Sprite({
   image: $res('myimage.png'),
 })
+```
+
+Add the resources to your loader.
+
+```js
+import { resources } from 'vite-plugin-excalibur-resources/runtime'
+
+const loader = new Loader(resources)
+
+game.start(loader)
+```
+
+Pro Tip: if you dynamically import a file `resources` will be populated for those files if they use `$res`. This means you can load resources incrementally (and automatically!) as you load scenes, for example.
+
+```js
+async function goToLevel2() {
+  await import('./scenes/level2')
+
+  game.start(loader).then(() => {
+    game.goToScene('level2')
+  })
+}
 ```
 
 ## Typescript
@@ -89,7 +101,7 @@ $res('/tileset.json', { as: 'tiled' })
 
 ## Custom resource loader
 
-You can add your own resource types by providing a `loaders` option. This is a path to a file that exports
+You can add your own resource types by providing a `loaders` option - a path to a file that adds additional resource loaders.
 
 ```js
 import { defineConfig } from 'vite'
