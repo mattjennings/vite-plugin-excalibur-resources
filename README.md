@@ -159,7 +159,7 @@ const custom = $res('/model.json', { as: 'custom' })
 
 ## Aseprite / Tiled
 
-I've provided optional loaders for Aseprite and Tiled. You can import and add them to a [custom loader])(#custom-resource-loader).
+I've provided optional loaders for Aseprite and Tiled. You can import and add them to a [custom loader](#custom-resource-loader).
 
 ```ts
 // src/loaders.ts
