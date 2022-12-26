@@ -1,32 +1,7 @@
 import { AsepriteResource } from '@excaliburjs/plugin-aseprite'
 import { TiledMapResource } from '@excaliburjs/plugin-tiled'
 import { ImageSource, Sound } from 'excalibur'
-
-const resourceLoaders = {
-  image: {
-    load: (url, options) =>
-      new ImageSource(url, options.bustCache, options.filtering),
-    extensions: ['png', 'jpg', 'jpeg', 'gif', 'webp'],
-  },
-  sound: {
-    load: (url) => new Sound(url),
-    extensions: ['mp3', 'ogg', 'wav'],
-  },
-  tiled: {
-    load: (url, options) => {
-      const resource = new TiledMapResource(url, {
-        mapFormatOverride: options.mapFormatOverride,
-        startingLayerZIndex: options.startingLayerZIndex,
-      })
-
-      return resource
-    },
-    extensions: ['tmx'],
-  },
-  aseprite: {
-    load: (url, options) => new AsepriteResource(url, options.bustCache),
-  },
-}
+import loaders from 'virtual:resource-loaders'
 
 export const resources = []
 
@@ -36,7 +11,7 @@ export const resources = []
  * @param {{ as?: string }} options
  * @returns
  */
-export function addResourceByUrl(url, options) {
+export function addResourceByUrl(url, options = {}) {
   let type
   if (url.startsWith('data:')) {
     const [, _type] = url.match(/^data:([^;]+);(base64)?,(.*)$/) || []
@@ -48,14 +23,14 @@ export function addResourceByUrl(url, options) {
   } else {
     type = url.split('?')[0].split('.').pop()
   }
-  const resourceLoader = options?.as
-    ? resourceLoaders[options.as]
-    : Object.values(resourceLoaders).find((loader) =>
-        loader.extensions.includes(type)
-      )
+  const { as: _as, ...opts } = options ?? {}
 
-  if (resourceLoader) {
-    const resource = resourceLoader.load(url, options ?? {})
+  const loader = _as
+    ? loaders[_as]
+    : Object.values(loaders).find((loader) => loader.extensions?.includes(type))
+
+  if (loader) {
+    const resource = loader.load(url, opts)
 
     if (!resources.includes(resource)) {
       resources.push(resource)
@@ -72,8 +47,8 @@ export function addResourceByUrl(url, options) {
  * @param {string} type
  * @param {{ load: (url: string, options?: Options) => import('excalibur').Loadable<unknown>, extensions?: string[] }} args
  */
-export function addResourceLoader(type, args) {
-  Object.assign(resourceLoaders, {
+export function addloader(type, args) {
+  Object.assign(loaders, {
     [type]: args,
   })
 }

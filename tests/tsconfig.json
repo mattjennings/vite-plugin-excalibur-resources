@@ -1,0 +1,12 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "types": ["vitest/globals"],
+    "paths": {
+      "vite-plugin-excalibur-resources/*": ["../src/*"],
+      "vite-plugin-excalibur-resources": ["../src/index.js"]
+    }
+  },
+  "include": ["../src", "."]
+}

@@ -72,46 +72,67 @@ If you are using Typescript (or jsconfig.json), you can get autocompletion for y
 }
 ```
 
-## Overriding asset loader
+## Overriding resource type
 
-By default, resource types are detected by their file extension. However some extensions are used for multiple kinds of asset types (such as JSON). You can specify the asset type by using the `as` keyword.
+By default a resource is determined by its file extension. However, extensions are not always 1-to-1 to a resource (for example, JSON could be used for many different resources). You can override the resource type by using the `as` option.
+
+(The Aseprite loader will actually require you to provide `as` to work because it uses JSON)
 
 ```js
 $res('/player.json', { as: 'aseprite' })
 $res('/tileset.json', { as: 'tiled' })
 ```
 
-## Adding a custom resource loader
+## Custom resource loader
 
-You can add your own asset loaders by using the `addResourceLoader` function. This should be done as early as possible in your code, before any `$res` calls for that asset are made.
+You can add your own resource types by providing a `loaders` option. This is a path to a file that exports
+
+```js
+import { defineConfig } from 'vite'
+import resources from 'vite-plugin-excalibur-resources'
+
+export default defineConfig({
+  plugins: [
+    resources({
+      loaders: '/src/loaders.ts',
+    }),
+  ],
+})
+```
+
+Here's an example that adds a custom resource type that loads a `.ctm` file.
 
 ```ts
-import { addResourceLoader } from 'vite-plugin-excalibur-resources/runtime'
-
-addResourceLoader('custom', {
-  load: (path, options) => {
-    // your custom resource class, see https://excaliburjs.com/docs/api/edge/classes/Resource.html
-    return new CustomResource(path, options)
+// src/loaders.ts
+export default {
+  // name of your resource. this is used for `as`
+  custom: {
+    load: (path, options) => {
+      // your custom resource class, see https://excaliburjs.com/docs/api/edge/classes/Resource.html
+      // this is what will be passed to the Excalibur Loader
+      return new CustomResource(path, options)
+    },
+    // optional - extensions to match for this loader when `as` is not specified
+    extension: ['ctm'],
   },
-  // optional, extensions to match for this loader when `as` is not specified
-  extension: ['ctm'],
-})
+}
 
+// if you're using typescript, this will update $res for your custom resource type
+declare module 'vite-plugin-excalibur-resources/types' {
+  interface Resource {
+    custom: {
+      type: CustomResource
+      extensions: 'ctm' // | 'other' | 'extensions'
+      options: {
+        foo?: string
+      }
+    }
+  }
+}
+
+// usage
 const custom = $res('/model.ctm')
 
 // force a .json file to use your custom loader
 const custom = $res('/model.json', { as: 'custom' })
-
-// if you're using Typescript, add this to get proper typing
-declare namespace ExcaliburResources {
-  interface ResourceType {
-    custom: CustomResource
-  }
-
-  interface ResourceOptions {
-    custom: {
-      // your options
-    }
-  }
-}
 ```

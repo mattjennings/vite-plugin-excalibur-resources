@@ -5,10 +5,21 @@ import tsParser from 'recast/parsers/typescript.js'
 import fg from 'fast-glob'
 import { generateTypes } from './generate-types.js'
 
+const DEFAULT_LOADERS = {
+  image: 'vite-plugin-excalibur-resources/loaders/image',
+  sound: 'vite-plugin-excalibur-resources/loaders/sound',
+  tiled: 'vite-plugin-excalibur-resources/loaders/tiled',
+  aseprite: 'vite-plugin-excalibur-resources/loaders/aseprite',
+}
+
+const virtualLoadersModuleId = 'virtual:resource-loaders'
+const resolvedVirtualLoadersModuleId = '\0' + virtualLoadersModuleId
+
 /**
+ * @param {import('./index').ResourcesPluginOptions} options
  * @returns {import('vite').Plugin}
  */
-export default function resources() {
+export default function resources(options = {}) {
   const isResource = (id) => {
     const [, params] = id.split('?')
     const query = qs.parse('?' + params)
@@ -16,24 +27,47 @@ export default function resources() {
     return !('url' in query) && id.startsWith('$res')
   }
 
+  let publicPath
   return {
     name: 'vite-plugin-import-excalibur-resource',
     enforce: 'pre',
+    configResolved(config) {
+      publicPath = config.publicDir
+    },
     resolveId(id) {
       if (isResource(id)) {
         return id
       }
+
+      if (id === virtualLoadersModuleId) {
+        return resolvedVirtualLoadersModuleId
+      }
     },
     load(id) {
-      const [res, params] = id.split('?')
-      const query = params ? qs.parse('?' + params) : {}
-
-      if (isResource(id)) {
-        const options = query.options
-          ? JSON.parse(decodeURIComponent(query.options))
-          : {}
-
+      if (id === resolvedVirtualLoadersModuleId) {
         return dedent(/* js */ `
+          import defaultLoaders from 'vite-plugin-excalibur-resources/loaders'
+          ${
+            options.loaders
+              ? `import customLoaders from '${options.loaders}'`
+              : 'const customLoaders = {}'
+          }
+
+          export default {
+            ...defaultLoaders,
+            ...customLoaders
+          }
+        `)
+      } else {
+        const [res, params] = id.split('?')
+        const query = params ? qs.parse('?' + params) : {}
+
+        if (isResource(id)) {
+          const options = query.options
+            ? JSON.parse(decodeURIComponent(query.options))
+            : {}
+
+          return dedent(/* js */ `
           import { addResourceByUrl } from 'vite-plugin-excalibur-resources/runtime'
                     
           const resource = addResourceByUrl(${JSON.stringify(
@@ -41,11 +75,12 @@ export default function resources() {
           )}, ${JSON.stringify(options)})
           export default resource
         `)
+        }
       }
     },
     // transform $res('/path/to/resource') to imports
     transform(code, id, options) {
-      if (options?.ssr || id.includes('node_modules') || !id.includes('.ts')) {
+      if (id.includes('node_modules')) {
         return
       }
 
@@ -121,12 +156,11 @@ export default function resources() {
       for (let file of files) {
         this.addWatchFile(file)
       }
-      generateTypes(process.cwd())
+      generateTypes(publicPath)
     },
     handleHotUpdate(ctx) {
-      console.log('handleHotUpdate', ctx)
       if (ctx.file.includes('/public/res')) {
-        generateTypes(process.cwd())
+        generateTypes(publicPath)
       }
     },
   }
