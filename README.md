@@ -74,6 +74,8 @@ You can get proper typing and autocompletion for your resources by updating your
 }
 ```
 
+**Note** these types are generated when you start your dev server or build your project. If you notice them not updating during development (i.e missing files), try restarting your server.
+
 ## Overriding resource type
 
 By default a resource is determined by its file extension. However, extensions are not always 1-to-1 to a resource (for example, JSON could be used for many different resources). You can override the resource type by using the `as` option.
@@ -121,13 +123,17 @@ export default {
 
 // if you're using typescript, this will update $res for your custom resource type
 declare module 'vite-plugin-excalibur-resources/types' {
-  interface Resource {
+  interface Resources {
     custom: {
       type: CustomResource
-      extensions: 'ctm' // | 'other' | 'extensions'
+
+      // optional
       options: {
         foo?: string
       }
+
+      // optional
+      extensions: 'ctm' // | 'other' | 'extensions'
     }
   }
 }
