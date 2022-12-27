@@ -58,16 +58,17 @@ export default function resources(options = {}) {
             ...customLoaders
           }
         `)
-      } else {
+      }
+
+      if (isResource(id)) {
         const [res, params] = id.split('?')
         const query = params ? qs.parse('?' + params) : {}
 
-        if (isResource(id)) {
-          const options = query.options
-            ? JSON.parse(decodeURIComponent(query.options))
-            : {}
+        const options = query.options
+          ? JSON.parse(decodeURIComponent(query.options))
+          : {}
 
-          return dedent(/* js */ `
+        return dedent(/* js */ `
           import { addResourceByUrl } from 'vite-plugin-excalibur-resources/runtime'
                     
           const resource = addResourceByUrl(${JSON.stringify(
@@ -75,12 +76,11 @@ export default function resources(options = {}) {
           )}, ${JSON.stringify(options)})
           export default resource
         `)
-        }
       }
     },
     // transform $res('/path/to/resource') to imports
     transform(code, id, options) {
-      if (id.includes('node_modules')) {
+      if (id.includes('node_modules') || !id.match(/\.(t|j)sx?$/)) {
         return
       }
 
