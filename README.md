@@ -86,7 +86,7 @@ You can get proper typing and autocompletion for your resources by updating your
 }
 ```
 
-**Note** these types are generated when you start your dev server or build your project. If you notice them not updating during development (i.e missing files), try restarting your server.
+**Note** these types are generated when you start your dev server or build your project. If you notice them not updating during development (i.e missing files), try restarting your server. If you're using VS Code, also try 'Restart TS Server' via the command palette.
 
 ## Overriding resource type
 
