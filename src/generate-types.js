@@ -1,4 +1,3 @@
-import dedent from 'dedent'
 import path from 'path'
 import { posixify, walk } from './fs.js'
 import { createRequire } from 'module'

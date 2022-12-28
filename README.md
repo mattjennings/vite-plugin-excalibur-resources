@@ -86,7 +86,17 @@ You can get proper typing and autocompletion for your resources by updating your
 }
 ```
 
-**Note** these types are generated when you start your dev server or build your project. If you notice them not updating during development (i.e missing files), try restarting your server. If you're using VS Code, also try 'Restart TS Server' via the command palette.
+I'd also recommend adding the following to your `package.json` so types are correctly generated after npm installing
+
+```json
+"scripts": {
+  "prepare": "excalibur-resources generate"
+}
+```
+
+It can also be ran manually with `npx excalibur-resources generate`.
+
+If you notice types not updating while developing, try restarting the dev server. If you're using VS Code, try 'Restart TS Server' via the command palette.
 
 ## Overriding resource type
 

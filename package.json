@@ -1,8 +1,11 @@
 {
   "name": "vite-plugin-excalibur-resources",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "main": "./src/index.js",
+  "bin": {
+    "excalibur-resources": "./bin/excalibur-resources.js"
+  },
   "exports": {
     "./loaders/aseprite": {
       "import": "./src/loaders/aseprite.js",
