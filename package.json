@@ -60,7 +60,6 @@
     "@excaliburjs/plugin-tiled": "^0.27.0"
   },
   "devDependencies": {
-    "@babel/parser": "^7.20.7",
     "excalibur": "^0.27.0",
     "typescript": "^4.9.3",
     "vite": "^4.0.0",
@@ -70,7 +69,8 @@
     "dedent": "^0.7.0",
     "fast-glob": "^3.2.12",
     "query-string": "^8.1.0",
-    "recast": "^0.22.0"
+    "recast": "^0.22.0",
+    "@babel/parser": "^7.20.7"
   },
   "pnpm": {
     "overrides": {
