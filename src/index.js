@@ -64,6 +64,11 @@ export default function resources(options = {}) {
         const [res, params] = id.split('?')
         const query = params ? qs.parse('?' + params) : {}
 
+        const url = res
+          // remove the .js extension added by code transform
+          .replace(/\.js(\?.*)?$/, '$1')
+          .replace('$res', '/res')
+
         const options = query.options
           ? JSON.parse(decodeURIComponent(query.options))
           : {}
@@ -72,7 +77,7 @@ export default function resources(options = {}) {
           import { addResourceByUrl } from 'vite-plugin-excalibur-resources/runtime'
                     
           const resource = addResourceByUrl(${JSON.stringify(
-            res.replace('$res', '/res')
+            url
           )}, ${JSON.stringify(options)})
           export default resource
         `)
@@ -126,9 +131,8 @@ export default function resources(options = {}) {
                 )}`
               : `$res/${importArg.value}`
 
-            if (source.includes('.json?')) {
-              source = source.replace('.json?', '.json?raw&')
-            }
+            // replace extension with (extension).js
+            source = source.replace(/(\.[a-z]+)([?].*)?$/, '$1.js$2')
 
             // replace $res with variable
             path.replace(b.identifier(varName))
