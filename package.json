@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-excalibur-resources",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "type": "module",
   "main": "./src/index.js",
   "bin": {
@@ -46,21 +46,18 @@
     }
   },
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
     "test": "vitest --config tests/vite.config.js",
     "prepublishOnly": "npm run test -- run"
   },
   "peerDependencies": {
-    "excalibur": "^0.27.0"
+    "excalibur": ">=0.28"
   },
   "optionalDependencies": {
-    "@excaliburjs/plugin-aseprite": "^0.27.0",
-    "@excaliburjs/plugin-tiled": "^0.27.0"
+    "@excaliburjs/plugin-aseprite": ">=0.28",
+    "@excaliburjs/plugin-tiled": ">=0.28"
   },
   "devDependencies": {
-    "excalibur": "^0.27.0",
+    "excalibur": "^0.28.6",
     "typescript": "^4.9.3",
     "vite": "^4.0.0",
     "vitest": "^0.26.2"
