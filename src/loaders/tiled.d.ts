@@ -1,7 +1,7 @@
 import { TiledMapResource, TiledMapOptions } from '@excaliburjs/plugin-tiled'
 
 export default {
-  load: (url, options) => TiledMapResource,
+  load: (url: string, options: TiledMapOptions) => TiledMapResource,
   extensions: ['tmx'],
 }
 

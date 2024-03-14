@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-excalibur-resources",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "type": "module",
   "main": "./src/index.js",
   "bin": {
@@ -14,6 +14,10 @@
     "./loaders/tiled": {
       "import": "./src/loaders/tiled.js",
       "types": "./src/loaders/tiled.d.ts"
+    },
+    "./loaders/ldtk": {
+      "import": "./src/loaders/ldtk.js",
+      "types": "./src/loaders/ldtk.d.ts"
     },
     "./loaders": {
       "import": "./src/loaders.js"
@@ -42,6 +46,9 @@
       ],
       "loaders/tiled": [
         "src/loaders/tiled.d.ts"
+      ],
+      "loaders/ldtk": [
+        "src/loaders/ldtk.d.ts"
       ]
     }
   },
@@ -54,10 +61,11 @@
   },
   "optionalDependencies": {
     "@excaliburjs/plugin-aseprite": ">=0.28",
-    "@excaliburjs/plugin-tiled": ">=0.28"
+    "@excaliburjs/plugin-tiled": ">=0.28",
+    "@excaliburjs/plugin-ldtk": ">=0.28"
   },
   "devDependencies": {
-    "excalibur": "^0.28.6",
+    "excalibur": "^0.29.1",
     "typescript": "^4.9.3",
     "vite": "^4.0.0",
     "vitest": "^0.26.2"

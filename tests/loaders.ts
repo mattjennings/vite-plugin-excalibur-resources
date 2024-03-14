@@ -1,5 +1,6 @@
 import aseprite from '../src/loaders/aseprite'
 import tiled from '../src/loaders/tiled'
+import ldtk from '../src/loaders/ldtk'
 
 export class CustomResource {
   path: string
@@ -14,6 +15,7 @@ export class CustomResource {
 export default {
   aseprite,
   tiled,
+  ldtk,
   // custom: {
   //   load: (path: string, options: any) => {
   //     return new CustomResource(path, options)

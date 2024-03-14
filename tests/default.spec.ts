@@ -1,5 +1,6 @@
 vi.mock('@excaliburjs/plugin-aseprite', () => ({}))
 vi.mock('@excaliburjs/plugin-tiled', () => ({}))
+vi.mock('@excaliburjs/plugin-ldtk', () => ({}))
 vi.mock('excalibur', () => ({
   ImageSource: vi.fn(),
   Sound: vi.fn(),

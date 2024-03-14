@@ -9,7 +9,7 @@ vi.mock('@excaliburjs/plugin-ldtk', () => ({
 }))
 vi.mock('excalibur', () => ({}))
 
-import { AsepriteResource } from '@excaliburjs/plugin-aseprite'
+import { LdtkResource } from '@excaliburjs/plugin-ldtk'
 
 // because $res converts to imports, we can't clear mocks between tests
 // as each import will have already called new XYZResource(). so if a test
@@ -17,19 +17,27 @@ import { AsepriteResource } from '@excaliburjs/plugin-aseprite'
 function getLastCall(mock: any): any[] {
   return mock.mock.calls[0]
 }
-describe('aseprite', () => {
+
+describe('tiled', () => {
+  test('tmx', () => {
+    expect($res('top-down.ldtk')).toBeInstanceOf(LdtkResource)
+  })
+
   test('json', () => {
-    expect($res('file.json', { as: 'aseprite' })).toBeInstanceOf(
-      AsepriteResource
-    )
+    expect($res('file.json', { as: 'ldtk' })).toBeInstanceOf(LdtkResource)
   })
 
   test('with options', () => {
     expect(
-      $res('file.json', { as: 'aseprite', bustCache: true })
-    ).toBeInstanceOf(AsepriteResource)
-    const lastCall = getLastCall(AsepriteResource)
+      $res('file.json', {
+        as: 'ldtk',
+        useExcaliburWiring: false,
+      })
+    ).toBeInstanceOf(LdtkResource)
+    const lastCall = getLastCall(LdtkResource)
     expect(lastCall[0]).toBe('/res/file.json')
-    expect(lastCall[1]).toBe(true)
+    expect(lastCall[1]).toStrictEqual({
+      useExcaliburWiring: false,
+    })
   })
 })

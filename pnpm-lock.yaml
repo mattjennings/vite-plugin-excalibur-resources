@@ -29,14 +29,17 @@ importers:
     optionalDependencies:
       '@excaliburjs/plugin-aseprite':
         specifier: '>=0.28'
-        version: 0.28.1(excalibur@0.28.6)
+        version: 0.28.1(excalibur@0.29.1)
+      '@excaliburjs/plugin-ldtk':
+        specifier: '>=0.28'
+        version: 0.29.3(excalibur@0.29.1)
       '@excaliburjs/plugin-tiled':
         specifier: '>=0.28'
-        version: 0.28.0(excalibur@0.28.6)
+        version: 0.28.0(excalibur@0.29.1)
     devDependencies:
       excalibur:
-        specifier: ^0.28.6
-        version: 0.28.6
+        specifier: ^0.29.1
+        version: 0.29.1
       typescript:
         specifier: ^4.9.3
         version: 4.9.4
@@ -306,6 +309,29 @@ packages:
       pako: 2.1.0
     dev: false
 
+  /@excaliburjs/plugin-aseprite@0.28.1(excalibur@0.29.1):
+    resolution: {integrity: sha512-zxcL7MzzZ07fZHyRmM2HWxhOuWxwXTlXnjaNzJD9tf+7hMOzg8C/B6KBl0ja9WQwf7MwZilz89h0TtxRab7Fog==}
+    requiresBuild: true
+    peerDependencies:
+      excalibur: ~0.28.1
+    dependencies:
+      excalibur: 0.29.1
+      pako: 2.1.0
+    dev: false
+    optional: true
+
+  /@excaliburjs/plugin-ldtk@0.29.3(excalibur@0.29.1):
+    resolution: {integrity: sha512-nJ1sZYwUKVWSnje4+xNRAdOeuDN5iWwHPIT/jFYgmkv8R70sShTCGMV7DiLQFBePzbhgGIzR+RgtI1ClqXiT7A==}
+    requiresBuild: true
+    peerDependencies:
+      excalibur: ~0.29.0
+    dependencies:
+      compare-versions: 6.1.0
+      excalibur: 0.29.1
+      zod: 3.22.4
+    dev: false
+    optional: true
+
   /@excaliburjs/plugin-tiled@0.28.0(excalibur@0.28.6):
     resolution: {integrity: sha512-WacDIvOP2ikFIEEdlZ7MW8p/d+4ca6JAg+t46EdoqNYfVd2npXIjklLYM25jqf0QMnSvEoxXh6KSIyIHlsbiqw==}
     requiresBuild: true
@@ -317,6 +343,19 @@ packages:
       pako: 1.0.11
       zstddec: 0.0.2
     dev: false
+
+  /@excaliburjs/plugin-tiled@0.28.0(excalibur@0.29.1):
+    resolution: {integrity: sha512-WacDIvOP2ikFIEEdlZ7MW8p/d+4ca6JAg+t46EdoqNYfVd2npXIjklLYM25jqf0QMnSvEoxXh6KSIyIHlsbiqw==}
+    requiresBuild: true
+    peerDependencies:
+      excalibur: ~0.28.1
+    dependencies:
+      excalibur: 0.29.1
+      fast-xml-parser: 3.21.1
+      pako: 1.0.11
+      zstddec: 0.0.2
+    dev: false
+    optional: true
 
   /@nodelib/fs.scandir@2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -428,8 +467,19 @@ packages:
       get-func-name: 2.0.2
     dev: true
 
+  /compare-versions@6.1.0:
+    resolution: {integrity: sha512-LNZQXhqUvqUTotpZ00qLSaify3b4VFD588aRr8MKFw4CMUr98ytzCW5wDH5qx/DEY5kCDXcbcRuCqL0szEf2tg==}
+    requiresBuild: true
+    dev: false
+    optional: true
+
   /core-js@3.33.3:
     resolution: {integrity: sha512-lo0kOocUlLKmm6kv/FswQL8zbkH7mVsLJ/FULClOhv8WRVmKLVcs6XPNQAzstfeJTCHMyButEwG+z1kHxHoDZw==}
+    requiresBuild: true
+    dev: false
+
+  /core-js@3.35.1:
+    resolution: {integrity: sha512-IgdsbxNyMskrTFxa9lWHyMwAJU5gXOPP+1yO+K59d50VLVAIDAbs7gIv705KzALModfK3ZrSZTPNpC0PQgIZuw==}
     requiresBuild: true
 
   /debug@4.3.4:
@@ -512,6 +562,12 @@ packages:
     resolution: {integrity: sha512-1EZGa7LPC1Ad+BsbvPXzz+l59DV6IkFDdat/Uc0V7bZl05rftpIZkBuJ8Mb5+juHq+0T921clg5tmlQX/bZ/BQ==}
     dependencies:
       core-js: 3.33.3
+    dev: false
+
+  /excalibur@0.29.1:
+    resolution: {integrity: sha512-VVgFzuRTBJjn2Za3KtrYPUN0SgkoS+KrRfx7KxjROAO55FwV1N4S6bFBaCb09YC0mG9MbXTZx8WSG2CGvPm/BA==}
+    dependencies:
+      core-js: 3.35.1
 
   /fast-glob@3.2.12:
     resolution: {integrity: sha512-DVj4CQIYYow0BlaelwK1pHl5n5cRSJfM60UA0zK891sVInoPri2Ekj7+e1CT3/3qxXenpI+nBBmQAcJPJgaj4w==}
@@ -1051,6 +1107,12 @@ packages:
       has-tostringtag: 1.0.0
       is-typed-array: 1.1.10
     dev: false
+
+  /zod@3.22.4:
+    resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
+    requiresBuild: true
+    dev: false
+    optional: true
 
   /zstddec@0.0.2:
     resolution: {integrity: sha512-DCo0oxvcvOTGP/f5FA6tz2Z6wF+FIcEApSTu0zV5sQgn9hoT5lZ9YRAKUraxt9oP7l4e8TnNdi8IZTCX6WCkwA==}

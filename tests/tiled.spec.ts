@@ -4,6 +4,9 @@ vi.mock('@excaliburjs/plugin-aseprite', () => ({
 vi.mock('@excaliburjs/plugin-tiled', () => ({
   TiledMapResource: vi.fn(),
 }))
+vi.mock('@excaliburjs/plugin-ldtk', () => ({
+  LdtkResource: vi.fn(),
+}))
 vi.mock('excalibur', () => ({}))
 
 import { TiledMapResource } from '@excaliburjs/plugin-tiled'
