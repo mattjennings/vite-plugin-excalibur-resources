@@ -4,9 +4,10 @@ vi.mock('@excaliburjs/plugin-ldtk', () => ({}))
 vi.mock('excalibur', () => ({
   ImageSource: vi.fn(),
   Sound: vi.fn(),
+  FontSource: vi.fn(),
 }))
 
-import { ImageSource, Sound } from 'excalibur'
+import { FontSource, ImageSource, Sound } from 'excalibur'
 
 // because $res converts to imports, we can't clear mocks between tests
 // as each import will have already called new XYZResource(). so if a test
@@ -66,5 +67,32 @@ describe('sound', () => {
 
   test('with as', () => {
     expect($res('block.png', { as: 'sound' })).toBeInstanceOf(Sound)
+  })
+})
+
+describe('font', () => {
+  test('woff', () => {
+    expect($res('font.woff')).toBeInstanceOf(FontSource)
+  })
+
+  test('woff2', () => {
+    expect($res('font.woff2')).toBeInstanceOf(FontSource)
+  })
+
+  test('with as', () => {
+    expect($res('block.png', { as: 'font', family: 'abc' })).toBeInstanceOf(
+      FontSource
+    )
+  })
+
+  test('with options', () => {
+    expect(
+      $res('font.woff', { family: 'abc', color: 'blue' as any })
+    ).toBeInstanceOf(FontSource)
+    const lastCall = getLastCall(FontSource)
+
+    expect(lastCall[0]).toBe('/res/font.woff')
+    expect(lastCall[1]).toBe('abc')
+    expect(lastCall[2]).toEqual({ color: 'blue' })
   })
 })

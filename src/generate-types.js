@@ -36,6 +36,12 @@ declare module './types' {
       type: ex.Sound
       extensions: 'mp3' | 'ogg' | 'wav'            
     }
+
+    font: {
+      type: ex.FontSource
+      extensions: 'ttf' | 'woff' | 'woff2' | 'otf'
+      options: ex.FontSourceOptions & { family: string }
+    }
   }
 
 

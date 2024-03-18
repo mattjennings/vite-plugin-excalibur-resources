@@ -1,4 +1,4 @@
-import { ImageSource } from 'excalibur'
+import { FontSource, ImageSource } from 'excalibur'
 import { Sound } from 'excalibur'
 
 export default {
@@ -10,5 +10,10 @@ export default {
   sound: {
     load: (url) => new Sound(url),
     extensions: ['mp3', 'ogg', 'wav'],
+  },
+  font: {
+    load: (url, { family, ...options } = {}) =>
+      new FontSource(url, family, options),
+    extensions: ['ttf', 'woff', 'woff2', 'otf'],
   },
 }
