@@ -18,6 +18,14 @@ function getLastCall(mock: any): any[] {
   return mock.mock.calls[0]
 }
 describe('aseprite', () => {
+  test('ase', () => {
+    expect($res('file.ase')).toBeInstanceOf(AsepriteResource)
+  })
+
+  test('aseprite', () => {
+    expect($res('file.aseprite')).toBeInstanceOf(AsepriteResource)
+  })
+
   test('json', () => {
     expect($res('file.json', { as: 'aseprite' })).toBeInstanceOf(
       AsepriteResource

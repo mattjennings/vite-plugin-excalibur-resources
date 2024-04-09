@@ -8,6 +8,7 @@ declare module '../types' {
   interface Resources {
     aseprite: {
       type: AsepriteResource
+      extensions: 'ase' | 'aseprite'
       options: { bustCache?: boolean }
     }
   }
