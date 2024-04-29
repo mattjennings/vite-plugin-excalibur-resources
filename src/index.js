@@ -1,7 +1,7 @@
 import qs from 'query-string'
 import dedent from 'dedent'
 import recast from 'recast'
-import tsParser from 'recast/parsers/typescript.js'
+import parser from 'recast/parsers/babel-ts.js'
 import fg from 'fast-glob'
 import { generateTypes } from './generate-types.js'
 
@@ -90,9 +90,7 @@ export default function resources(options = {}) {
       }
 
       const tsAst = recast.parse(code, {
-        parser: {
-          parse: tsParser.parse,
-        },
+        parser: parser,
         sourceFileName: id,
       })
 
