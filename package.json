@@ -57,15 +57,15 @@
     "prepublishOnly": "npm run test -- run"
   },
   "peerDependencies": {
-    "excalibur": ">=0.28"
+    "excalibur": ">=0.29"
   },
   "optionalDependencies": {
-    "@excaliburjs/plugin-aseprite": ">=0.28",
-    "@excaliburjs/plugin-tiled": ">=0.28",
-    "@excaliburjs/plugin-ldtk": ">=0.28"
+    "@excaliburjs/plugin-aseprite": ">=0.29.1",
+    "@excaliburjs/plugin-tiled": ">=0.29.2",
+    "@excaliburjs/plugin-ldtk": ">=0.29.5"
   },
   "devDependencies": {
-    "excalibur": "^0.29.1",
+    "excalibur": "^0.29.3",
     "typescript": "^4.9.3",
     "vite": "^4.0.0",
     "vitest": "^0.26.2"

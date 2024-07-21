@@ -2,14 +2,14 @@ vi.mock('@excaliburjs/plugin-aseprite', () => ({
   AsepriteResource: vi.fn(),
 }))
 vi.mock('@excaliburjs/plugin-tiled', () => ({
-  TiledMapResource: vi.fn(),
+  TiledResource: vi.fn(),
 }))
 vi.mock('@excaliburjs/plugin-ldtk', () => ({
   LdtkResource: vi.fn(),
 }))
 vi.mock('excalibur', () => ({}))
 
-import { TiledMapResource } from '@excaliburjs/plugin-tiled'
+import { TiledResource } from '@excaliburjs/plugin-tiled'
 
 // because $res converts to imports, we can't clear mocks between tests
 // as each import will have already called new XYZResource(). so if a test
@@ -20,11 +20,11 @@ function getLastCall(mock: any): any[] {
 
 describe('tiled', () => {
   test('tmx', () => {
-    expect($res('tilemap.tmx')).toBeInstanceOf(TiledMapResource)
+    expect($res('tilemap.tmx')).toBeInstanceOf(TiledResource)
   })
 
   test('json', () => {
-    expect($res('file.json', { as: 'tiled' })).toBeInstanceOf(TiledMapResource)
+    expect($res('file.json', { as: 'tiled' })).toBeInstanceOf(TiledResource)
   })
 
   test('with options', () => {
@@ -32,14 +32,14 @@ describe('tiled', () => {
       $res('file.json', {
         as: 'tiled',
         mapFormatOverride: 'TMX' as any,
-        startingLayerZIndex: 10,
+        startZIndex: 10,
       })
-    ).toBeInstanceOf(TiledMapResource)
-    const lastCall = getLastCall(TiledMapResource)
+    ).toBeInstanceOf(TiledResource)
+    const lastCall = getLastCall(TiledResource)
     expect(lastCall[0]).toBe('/res/file.json')
     expect(lastCall[1]).toStrictEqual({
       mapFormatOverride: 'TMX',
-      startingLayerZIndex: 10,
+      startZIndex: 10,
     })
   })
 })
