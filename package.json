@@ -1,8 +1,12 @@
 {
   "name": "vite-plugin-excalibur-resources",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "type": "module",
   "main": "./src/index.js",
+  "workspaces": [
+    ".",
+    "./example"
+  ],
   "bin": {
     "excalibur-resources": "./bin/excalibur-resources.js"
   },
@@ -57,29 +61,24 @@
     "prepublishOnly": "npm run test -- run"
   },
   "peerDependencies": {
-    "excalibur": ">=0.29"
+    "excalibur": "0.x"
   },
   "optionalDependencies": {
-    "@excaliburjs/plugin-aseprite": ">=0.29.1",
-    "@excaliburjs/plugin-tiled": ">=0.29.2",
-    "@excaliburjs/plugin-ldtk": ">=0.29.5"
+    "@excaliburjs/plugin-aseprite": "^0.30.0",
+    "@excaliburjs/plugin-ldtk": "^0.30.0",
+    "@excaliburjs/plugin-tiled": "^0.30.0"
   },
   "devDependencies": {
-    "excalibur": "^0.29.3",
-    "typescript": "^4.9.3",
-    "vite": "^4.0.0",
-    "vitest": "^0.26.2"
+    "excalibur": "^0.30.0",
+    "typescript": "^5.9.0",
+    "vite": "^7.1.7",
+    "vitest": "^3.2.4"
   },
   "dependencies": {
-    "dedent": "^0.7.0",
+    "@babel/parser": "^7.20.7",
+    "dedent": "^1.7.0",
     "fast-glob": "^3.2.12",
-    "query-string": "^8.1.0",
-    "recast": "^0.22.0",
-    "@babel/parser": "^7.20.7"
-  },
-  "pnpm": {
-    "overrides": {
-      "vite-plugin-excalibur-resources": "workspace*"
-    }
+    "query-string": "^9.3.1",
+    "recast": "^0.23.11"
   }
 }

@@ -3,7 +3,12 @@ import * as ex from 'excalibur'
 const blockSprite = $res('block.png').toSprite()
 
 export class Floor extends ex.Actor {
-  constructor(x: number, y: number, public cols: number, public rows: number) {
+  constructor(
+    x: number,
+    y: number,
+    public cols: number,
+    public rows: number,
+  ) {
     super({
       name: 'Floor',
       pos: new ex.Vector(x, y),
@@ -14,13 +19,21 @@ export class Floor extends ex.Actor {
       collisionGroup: ex.CollisionGroupManager.groupByName('floor'),
     })
 
+    let blocks = []
+
     for (let i = 0; i < this.cols; i++) {
       for (let j = 0; j < this.rows; j++) {
-        this.graphics.show(blockSprite, {
+        blocks.push({
+          graphic: blockSprite,
           anchor: ex.Vector.Zero,
           offset: ex.vec(i * blockSprite.width, j * blockSprite.height),
         })
       }
     }
+    this.graphics.use(
+      new ex.GraphicsGroup({
+        members: blocks,
+      }),
+    )
   }
 }

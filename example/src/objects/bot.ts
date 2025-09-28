@@ -35,14 +35,14 @@ export class Bot extends ex.Actor {
     const hurtleft = ex.Animation.fromSpriteSheet(
       botSpriteSheet,
       [0, 1, 0, 1, 0, 1],
-      150
+      150,
     )
     hurtleft.scale = new ex.Vector(2, 2)
 
     const hurtright = ex.Animation.fromSpriteSheet(
       botSpriteSheet,
       [0, 1, 0, 1, 0, 1],
-      150
+      150,
     )
     hurtright.scale = new ex.Vector(2, 2)
     hurtright.flipHorizontal = true
@@ -53,14 +53,14 @@ export class Bot extends ex.Actor {
     const left = ex.Animation.fromSpriteSheet(
       botSpriteSheet,
       [3, 4, 5, 6, 7],
-      100
+      100,
     )
     left.scale = new ex.Vector(2, 2)
 
     const right = ex.Animation.fromSpriteSheet(
       botSpriteSheet,
       [3, 4, 5, 6, 7],
-      100
+      100,
     )
     right.scale = new ex.Vector(2, 2)
     right.flipHorizontal = true
@@ -78,7 +78,6 @@ export class Bot extends ex.Actor {
 
   onPostCollision(evt: ex.PostCollisionEvent) {
     // Bot has collided with it's Top of another collider
-    console.log(evt.other.name)
     if (evt.side === ex.Side.Bottom) {
       this.onGround = true
     }
@@ -114,15 +113,15 @@ export class Bot extends ex.Actor {
     this.vel.x = 0
 
     // Player input
-    if (engine.input.keyboard.isHeld(ex.Input.Keys.Left)) {
+    if (engine.input.keyboard.isHeld(ex.Keys.Left)) {
       this.vel.x = -150
     }
 
-    if (engine.input.keyboard.isHeld(ex.Input.Keys.Right)) {
+    if (engine.input.keyboard.isHeld(ex.Keys.Right)) {
       this.vel.x = 150
     }
 
-    if (engine.input.keyboard.isHeld(ex.Input.Keys.Up) && this.onGround) {
+    if (engine.input.keyboard.isHeld(ex.Keys.Up) && this.onGround) {
       this.vel.y = -400
       this.onGround = false
       $res('jump.wav').play(0.1)
